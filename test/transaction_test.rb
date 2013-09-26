@@ -27,7 +27,7 @@ class TransactionTest < MiniTest::Test
   end
 
   def test_transaction_id
-    assert_equal transaction_attributes[:id], transaction.transaction_id
+    assert_equal transaction_attributes[:id], transaction.id
   end
 
   def test_invoice_id
