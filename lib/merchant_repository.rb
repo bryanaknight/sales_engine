@@ -18,14 +18,10 @@ class MerchantRepository
     end
   end
 
-  #This is some random shit!!!
   def random
     merchant_objects.sample
   end
 
-  #Add functionality to type attribute
-  #where the attribute does not have to
-  #be a symbol.
   def find_by_attribute(attribute, value)
     merchant_objects.find do |merchant|
       merchant.send(attribute).downcase == value.downcase
