@@ -1,10 +1,10 @@
-require "merchant"
+require "customer"
 require "pry"
 require "csv"
 
-class MerchantRepository
+class CustomerRepository
  attr_reader :filename
-  def initialize(filename = "./data/merchants.csv")
+  def initialize(filename = "./data/customers.csv")
     @filename = filename
   end
 
@@ -12,28 +12,32 @@ class MerchantRepository
     rows = CSV.read filename, headers: true, header_converters: :symbol
   end
 
-  def merchant_objects
-    merchants_list = read_file.collect do |merchant|
-      Merchant.new(merchant)
+  def customer_objects
+    customers = read_file.collect do |customer|
+      Customer.new(customer)
     end
   end
 
   def random
-    merchant_objects.sample
+    customer_objects.sample
   end
 
   def find_by_attribute(attribute, value)
-    merchant_objects.find do |merchant|
-      merchant.send(attribute).downcase == value.downcase
+    customer_objects.find do |customer|
+      customer.send(attribute).downcase == value.downcase
     end
-  end
-
-  def find_by_name(value)
-    find_by_attribute(:name, value)
   end
 
   def find_by_id(value)
     find_by_attribute(:id, value)
+  end
+
+  def find_by_first_name(value)
+    find_by_attribute(:first_name, value)
+  end
+
+  def find_by_last_name(value)
+    find_by_attribute(:last_name, value)
   end
 
   def find_by_created_at(value)
@@ -45,17 +49,21 @@ class MerchantRepository
   end
   
   def find_all_by_attribute(attribute, value)
-    merchant_objects.select do |merchant|
-      merchant.send(attribute).downcase == value.downcase
+    customer_objects.select do |customer|
+      customer.send(attribute).downcase == value.downcase
     end
-  end
-
-  def find_all_by_name(value)
-    find_all_by_attribute(:name, value)
   end
 
   def find_all_by_id(value)
     find_all_by_attribute(:id, value)
+  end
+
+  def find_all_by_first_name(value)
+    find_all_by_attribute(:first_name, value)
+  end
+
+  def find_all_by_last_name(value)
+    find_all_by_attribute(:last_name, value)
   end
 
   def find_all_by_created_at(value)
