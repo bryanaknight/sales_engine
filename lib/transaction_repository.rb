@@ -3,9 +3,10 @@ require "pry"
 require "csv"
 
 class TransactionRepository
- attr_reader :filename
+ attr_reader :filename :engine
   def initialize(filename = "./data/transactions.csv")
     @filename = filename
+    @engine   = engine
   end
 
   def read_file
@@ -14,7 +15,7 @@ class TransactionRepository
 
   def transaction_objects
     transactions = read_file.collect do |transaction|
-      Transaction.new(transaction)
+      Transaction.new(transaction, @engine)
     end
   end
 
@@ -55,7 +56,7 @@ class TransactionRepository
   def find_by_updated_at(value)
     find_by_attribute(:updated_at, value)
   end
-  
+
   def find_all_by_attribute(attribute, value)
     transaction_objects.select do |transaction|
       transaction.send(attribute).downcase == value.downcase

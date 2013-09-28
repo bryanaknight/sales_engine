@@ -3,7 +3,7 @@ require "pry"
 require "csv"
 
 class MerchantRepository
- attr_reader :filename
+ attr_reader :filename, :engine
   def initialize(filename = "./data/merchants.csv")
     @filename = filename
   end
@@ -12,18 +12,18 @@ class MerchantRepository
     rows = CSV.read filename, headers: true, header_converters: :symbol
   end
 
-  def merchant_objects
+  def all
     merchants_list = read_file.collect do |merchant|
-      Merchant.new(merchant)
+      Merchant.new(merchant, @engine)
     end
   end
 
   def random
-    merchant_objects.sample
+    all.sample
   end
 
   def find_by_attribute(attribute, value)
-    merchant_objects.find do |merchant|
+    all.find do |merchant|
       merchant.send(attribute).downcase == value.downcase
     end
   end
@@ -43,9 +43,9 @@ class MerchantRepository
   def find_by_updated_at(value)
     find_by_attribute(:updated_at, value)
   end
-  
+
   def find_all_by_attribute(attribute, value)
-    merchant_objects.select do |merchant|
+    all.select do |merchant|
       merchant.send(attribute).downcase == value.downcase
     end
   end

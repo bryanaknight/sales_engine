@@ -10,8 +10,8 @@ class MerchantRepositoryTest < MiniTest::Test
     @mr = MerchantRepository.new
   end
 
-  def test_merchant_objects_are_created
-    assert_equal 'Schroeder-Jerde', mr.merchant_objects.first.name
+  def test_all_are_created
+    assert_equal 'Schroeder-Jerde', mr.all.first.name
   end
 
   def test_find_by_attribute
