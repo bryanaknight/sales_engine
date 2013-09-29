@@ -3,25 +3,28 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/invoice"
 require "csv"
+require './lib/invoice_repository'
 
 class InvoiceTest < MiniTest::Test
+  attr_reader :repo
+
   def contents
     contents = CSV.read "./data/invoices.csv", headers: true, header_converters: :symbol
   end
 
   def invoice_attributes
     contents.each do |attribute|
-      id          = attribute[:id]       
-      customer_id = attribute[:customer_id]       
+      id          = attribute[:id]
+      customer_id = attribute[:customer_id]
       merchant_id = attribute[:merchant_id]
       status      = attribute[:status]
-      created_at  = attribute[:created_at] 
-      updated_at  = attribute[:updated_at] 
+      created_at  = attribute[:created_at]
+      updated_at  = attribute[:updated_at]
     end
   end
 
   def invoice
-    @invoice ||= Invoice.new(invoice_attributes)
+    @invoice ||= Invoice.new(invoice_attributes, @repo)
   end
 
   def test_it_gets_item_id

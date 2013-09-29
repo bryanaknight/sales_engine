@@ -1,68 +1,54 @@
-require "merchant"
+require "./lib/merchant"
 require "pry"
 require "csv"
+require './lib/sales_engine'
 
 class MerchantRepository
  attr_reader :filename, :engine
-  def initialize(filename = "./data/merchants.csv")
+  def initialize(filename = "./data/merchants.csv", engine)
     @filename = filename
+    @engine = engine
   end
 
   def read_file
+    filename = "./data/merchants.csv"
     rows = CSV.read filename, headers: true, header_converters: :symbol
   end
 
   def all
-    merchants_list = read_file.collect do |merchant|
-      Merchant.new(merchant, @engine)
-    end
+    merchants = read_file.collect {|merchant| Merchant.new(merchant, self)}
   end
 
   def random
     all.sample
   end
 
-  def find_by_attribute(attribute, value)
-    all.find do |merchant|
-      merchant.send(attribute).downcase == value.downcase
+  %w(id name created_at updated_at).each do |var|
+    define_method "find_by_#{var}" do |value|
+      all.find {|merchant| merchant.send(var).downcase == value.downcase }
     end
   end
 
-  def find_by_name(value)
-    find_by_attribute(:name, value)
-  end
-
-  def find_by_id(value)
-    find_by_attribute(:id, value)
-  end
-
-  def find_by_created_at(value)
-    find_by_attribute(:created_at, value)
-  end
-
-  def find_by_updated_at(value)
-    find_by_attribute(:updated_at, value)
-  end
-
-  def find_all_by_attribute(attribute, value)
-    all.select do |merchant|
-      merchant.send(attribute).downcase == value.downcase
+  %w(id name created_at updated_at).each do |var|
+    define_method "find_all_by_#{var}" do |value|
+      all.select { |merchant| merchant.send(var).downcase == value.downcase }
     end
   end
 
-  def find_all_by_name(value)
-    find_all_by_attribute(:name, value)
-  end
-
-  def find_all_by_id(value)
-    find_all_by_attribute(:id, value)
-  end
-
-  def find_all_by_created_at(value)
-    find_all_by_attribute(:created_at, value)
-  end
-
-  def find_all_by_updated_at(value)
-    find_all_by_attribute(:updated_at, value)
-  end
 end
+
+  #%w(name age gender).each do |var|
+  #  define_method "this_is_#{var}" do |input|
+  #    puts "#{var} is #{input}"
+  #  end
+  #end
+  #binding.pry
+  #def name(input)
+  #  puts "#{name} is #{input}"
+  #end
+  #def age(input)
+  #  puts "#{age} is #{input}"
+  #end
+  #def gender(input)
+  #  puts "#{gender} is #{input}"
+  #end

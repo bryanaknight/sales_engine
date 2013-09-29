@@ -1,54 +1,50 @@
-require "invoice_items"
+require "./lib/invoice_items"
 require "pry"
 require "csv"
+require './lib/sales_engine'
 
 class InvoiceItemRepository
- attr_reader :filename
- 
-  def initialize(filename = "./data/invoice_items.csv")
+ attr_reader :filename, :engine
+
+  def initialize(filename = "./data/invoice_items.csv", engine)
     @filename = filename
+    @engine = engine
   end
 
   def read_file
+    filename = './data/invoice_items.csv'
     rows = CSV.read filename, headers: true, header_converters: :symbol
   end
 
-  def invoice_item_objects
-    invoice_items = read_file.collect do |invoice_item|
-      InvoiceItems.new(invoice_item)
-    end
+  def all
+    invoice_items = read_file.collect {|invoice_item| InvoiceItems.new(invoice_item, self)}
   end
 
-  #This is some random shit!!!
   def random
-    invoice_item_objects.sample
-  end
-  
-  #Add functionality to type attribute
-  #where the attribute does not have to
-  #be a symbol.
-  def find_by_attribute(attribute, value)
-    invoice_item_objects.find do |invoice_item|
-      invoice_item.send(attribute).downcase == value.downcase
-    end
-  end
-  
-  def find_all_by_attribute(attribute, value)
-    invoice_item_objects.select do |invoice_item|
-      invoice_item.send(attribute).downcase == value.downcase
-    end
+    all.sample
   end
 
   %w(id item_id invoice_id quantity unit_price created_at updated_at).each do |var|
     define_method "find_by_#{var}" do |value|
-      find_by_attribute("#{var}", "#{value}")
+      all.find {|invoice_item| invoice_item.send(var).downcase == value.downcase }
     end
   end
 
   %w(id item_id invoice_id quantity unit_price created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|
-      find_all_by_attribute("#{var}", "#{value}")
+      all.select { |invoice_item| invoice_item.send(var).downcase == value.downcase }
     end
   end
 
 end
+
+#Add functionality to type attribute
+  #where the attribute does not have to
+  #be a symbol.
+  #def find_by_attribute(attribute, value)
+  #  all.find { |invoice_item| invoice_item.send(attribute).downcase == value.downcase}
+  #end
+
+  #def find_all_by_attribute(attribute, value)
+  #  all.select { |invoice_item| invoice_item.send(attribute).downcase == value.downcase}
+  #end

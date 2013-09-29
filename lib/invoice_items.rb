@@ -1,3 +1,5 @@
+require './lib/sales_engine'
+
 class InvoiceItems
 
   attr_reader :id,
@@ -6,16 +8,22 @@ class InvoiceItems
               :quantity,
               :unit_price,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo
 
-  def initialize(item_attributes)
-    @id         = item_attributes[:id]
-    @item_id    = item_attributes[:item_id]
-    @invoice_id = item_attributes[:invoice_id]
-    @quantity   = item_attributes[:quantity]
-    @unit_price = item_attributes[:unit_price]
-    @created_at = item_attributes[:created_at]
-    @updated_at = item_attributes[:updated_at]
+  def initialize(attributes, repo)
+    @id         = attributes[:id]
+    @item_id    = attributes[:item_id]
+    @invoice_id = attributes[:invoice_id]
+    @quantity   = attributes[:quantity]
+    @unit_price = attributes[:unit_price]
+    @created_at = attributes[:created_at]
+    @updated_at = attributes[:updated_at]
+    @repo       = repo
   end
+
+  #def invoice
+  #  repo.engine.invoice.find_by_all_id(id)
+  #end
 
 end

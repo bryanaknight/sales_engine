@@ -1,76 +1,40 @@
-require "customer"
+require './lib/customer'
 require "pry"
 require "csv"
+require "./lib/sales_engine"
 
 class CustomerRepository
- attr_reader :filename
-  def initialize(filename = "./data/customers.csv")
+ attr_reader :filename,
+             :engine
+
+  def initialize(filename = "./data/customers.csv", engine)
     @filename = filename
+    @engine   = engine
   end
 
   def read_file
+    filename = './data/customers.csv'
     rows = CSV.read filename, headers: true, header_converters: :symbol
   end
 
-  def customer_objects
-    customers = read_file.collect do |customer|
-      Customer.new(customer)
-    end
+  def all
+    customers = read_file.collect { |customer| Customer.new(customer, self) }
   end
 
   def random
-    customer_objects.sample
+    all.sample
   end
 
-  def find_by_attribute(attribute, value)
-    customer_objects.find do |customer|
-      customer.send(attribute).downcase == value.downcase
+  %w(id first_name last_name created_at updated_at).each do |var|
+    define_method "find_by_#{var}" do |value|
+      all.find {|customer| customer.send(var).downcase == value.downcase }
     end
   end
 
-  def find_by_id(value)
-    find_by_attribute(:id, value)
-  end
-
-  def find_by_first_name(value)
-    find_by_attribute(:first_name, value)
-  end
-
-  def find_by_last_name(value)
-    find_by_attribute(:last_name, value)
-  end
-
-  def find_by_created_at(value)
-    find_by_attribute(:created_at, value)
-  end
-
-  def find_by_updated_at(value)
-    find_by_attribute(:updated_at, value)
-  end
-  
-  def find_all_by_attribute(attribute, value)
-    customer_objects.select do |customer|
-      customer.send(attribute).downcase == value.downcase
+  %w(id first_name last_name created_at updated_at).each do |var|
+    define_method "find_all_by_#{var}" do |value|
+      all.select { |customer| customer.send(var).downcase == value.downcase }
     end
   end
 
-  def find_all_by_id(value)
-    find_all_by_attribute(:id, value)
-  end
-
-  def find_all_by_first_name(value)
-    find_all_by_attribute(:first_name, value)
-  end
-
-  def find_all_by_last_name(value)
-    find_all_by_attribute(:last_name, value)
-  end
-
-  def find_all_by_created_at(value)
-    find_all_by_attribute(:created_at, value)
-  end
-
-  def find_all_by_updated_at(value)
-    find_all_by_attribute(:updated_at, value)
-  end
 end
