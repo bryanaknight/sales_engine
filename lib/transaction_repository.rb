@@ -27,13 +27,13 @@ class TransactionRepository
 
   %w(id invoice_id credit_card_number credit_card_expiration_date result created_at updated_at).each do |var|
     define_method "find_by_#{var}" do |value|
-      all.find {|transaction| transaction.send(var).downcase == value.downcase }
+      all.find {|transaction| transaction.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 
   %w(id invoice_id credit_card_number credit_card_expiration_date result created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|
-      all.select { |transaction| transaction.send(var).downcase == value.downcase }
+      all.select { |transaction| transaction.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 

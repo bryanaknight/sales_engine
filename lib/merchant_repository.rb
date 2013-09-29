@@ -25,13 +25,13 @@ class MerchantRepository
 
   %w(id name created_at updated_at).each do |var|
     define_method "find_by_#{var}" do |value|
-      all.find {|merchant| merchant.send(var).downcase == value.downcase }
+      all.find {|merchant| merchant.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 
   %w(id name created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|
-      all.select { |merchant| merchant.send(var).downcase == value.downcase }
+      all.select { |merchant| merchant.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 

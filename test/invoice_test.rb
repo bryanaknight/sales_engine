@@ -56,11 +56,11 @@ class InvoiceTest < MiniTest::Test
   end
 
   def test_finds_transactions_related_to_invoices
-    assert_equal 1, invoice.transactions('1').size
+    assert_kind_of Array, invoice.transactions
   end
 
   def test_finds_invoice_items_related_to_invoices
-    assert_equal 8, invoice.invoice_items('1').size
+    assert_equal 8, invoice.invoice_items.size
   end
 
 end

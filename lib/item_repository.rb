@@ -26,13 +26,13 @@ class ItemRepository
 
   %w(id name description unit_price merchant_id created_at updated_at).each do |var|
     define_method "find_by_#{var}" do |value|
-      all.find {|item| item.send(var).downcase == value.downcase }
+      all.find {|item| item.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 
   %w(id name description unit_price merchant_id created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|
-      all.select { |item| item.send(var).downcase == value.downcase }
+      all.select { |item| item.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 

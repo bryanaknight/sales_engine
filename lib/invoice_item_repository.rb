@@ -26,13 +26,13 @@ class InvoiceItemRepository
 
   %w(id item_id invoice_id quantity unit_price created_at updated_at).each do |var|
     define_method "find_by_#{var}" do |value|
-      all.find {|invoice_item| invoice_item.send(var).downcase == value.downcase }
+      all.find {|invoice_item| invoice_item.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 
   %w(id item_id invoice_id quantity unit_price created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|
-      all.select { |invoice_item| invoice_item.send(var).downcase == value.downcase }
+      all.select { |invoice_item| invoice_item.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 

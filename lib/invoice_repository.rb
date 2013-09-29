@@ -27,13 +27,13 @@ class InvoiceRepository
 
   %w(id customer_id merchant_id status created_at updated_at).each do |var|
     define_method "find_by_#{var}" do |value|
-      all.find {|invoice| invoice.send(var).downcase == value.downcase }
+      all.find {|invoice| invoice.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 
   %w(id customer_id merchant_id status created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|
-      all.select { |invoice| invoice.send(var).downcase == value.downcase }
+      all.select { |invoice| invoice.send(var).to_s.downcase == value.to_s.downcase }
     end
   end
 

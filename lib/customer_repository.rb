@@ -27,13 +27,13 @@ class CustomerRepository
 
   %w(id first_name last_name created_at updated_at).each do |var|
     define_method "find_by_#{var}" do |value|
-      all.find {|customer| customer.send(var).downcase == value.downcase }
+      all.find {|customer| customer.send(var).to_s.downcase == value.downcase }
     end
   end
 
   %w(id first_name last_name created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|
-      all.select { |customer| customer.send(var).downcase == value.downcase }
+      all.select { |customer| customer.send(var).to_s.downcase == value.downcase }
     end
   end
 

@@ -25,7 +25,7 @@ class Item
   #  invoic_item_repo = engine.invoice_item_repository
   #  invoic_item_repo.find_all_by_invoice_item_id(id)
   #end
-#
+
   #def merchant
   #  merchant_repo = engine.merchant_repository
   #  merchant_repo.find_all_by_merchant_id(id)
