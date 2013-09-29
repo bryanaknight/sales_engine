@@ -8,7 +8,7 @@ class InvoiceRepositoryTest < MiniTest::Test
   attr_reader :invoices, :engine
 
   def setup
-    @engine = SalesEngine.new.startup
+    @engine = SalesEngine.new
     @invoices = InvoiceRepository.new(nil, @engine)
   end
 

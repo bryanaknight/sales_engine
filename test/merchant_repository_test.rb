@@ -9,11 +9,12 @@ class MerchantRepositoryTest < MiniTest::Test
               :engine
 
   def setup
-    @engine = SalesEngine.new.startup
+    @engine = SalesEngine.new
     @mr = MerchantRepository.new(nil, @engine)
   end
 
   def test_find_by_name
+
     assert_equal 'Schroeder-Jerde', mr.find_by_name('Schroeder-Jerde').name
   end
 

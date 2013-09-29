@@ -6,7 +6,9 @@ require "csv"
 require './lib/invoice_repository'
 
 class InvoiceTest < MiniTest::Test
-  attr_reader :repo
+  attr_reader :repo,
+              :engine,
+              :invoice
 
   def contents
     contents = CSV.read "./data/invoices.csv", headers: true, header_converters: :symbol
@@ -23,8 +25,10 @@ class InvoiceTest < MiniTest::Test
     end
   end
 
-  def invoice
-    @invoice ||= Invoice.new(invoice_attributes, @repo)
+  def setup
+    @engine = SalesEngine.new
+    @repo = InvoiceRepository.new(nil, @engine)
+    @invoice = Invoice.new(invoice_attributes, @repo)
   end
 
   def test_it_gets_item_id
@@ -46,7 +50,17 @@ class InvoiceTest < MiniTest::Test
   def test_it_gets_created_at
     assert_equal invoice_attributes[:created_at], invoice.created_at
   end
+
   def test_it_gets_updated_at
     assert_equal invoice_attributes[:updated_at], invoice.updated_at
   end
+
+  def test_finds_transactions_related_to_invoices
+    assert_equal 1, invoice.transactions('1').size
+  end
+
+  def test_finds_invoice_items_related_to_invoices
+    assert_equal 8, invoice.invoice_items('1').size
+  end
+
 end

@@ -9,7 +9,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   attr_reader :invoiceitems, :engine
 
   def setup
-    @engine       = SalesEngine.new.startup
+    @engine       = SalesEngine.new
     @invoiceitems = InvoiceItemRepository.new(nil, @engine)
   end
 

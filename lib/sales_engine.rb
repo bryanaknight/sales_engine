@@ -13,7 +13,7 @@ class SalesEngine
               :invoice_item_repository,
               :transaction_repository
 
-  def startup
+  def initialize
     @invoice_repository      = InvoiceRepository.new(nil, self)
     @item_repository         = ItemRepository.new(nil, self)
     @invoice_item_repository = InvoiceItemRepository.new(nil, self)

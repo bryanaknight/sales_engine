@@ -9,7 +9,7 @@ class CustomerRepositoryTest < MiniTest::Test
               :engine
 
   def setup
-    @engine = SalesEngine.new.startup
+    @engine = SalesEngine.new
     @cr = CustomerRepository.new(nil, @engine)
   end
 

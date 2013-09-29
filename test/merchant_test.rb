@@ -4,9 +4,12 @@ require "minitest/pride"
 require "./lib/merchant"
 require "csv"
 require './lib/merchant_repository'
+require "./lib/sales_engine"
 
 class MerchantTest < Minitest::Test
-  attr_reader :repo
+  attr_reader :repo,
+              :engine,
+              :merchant
 
   def contents
     contents = CSV.read "./data/merchants.csv", headers: true, header_converters: :symbol
@@ -19,11 +22,12 @@ class MerchantTest < Minitest::Test
       created_at = row[:created_at]
       updated_at = row[:updated_at]
     end
-
   end
 
-  def merchant
-    @merchant ||= Merchant.new(merchant_attributes, repo)
+  def setup
+    @engine = SalesEngine.new
+    @repo = MerchantRepository.new(nil, @engine)
+    @merchant = Merchant.new(merchant_attributes, @repo)
   end
 
   def test_merchant_id
@@ -44,6 +48,14 @@ class MerchantTest < Minitest::Test
   def test_merchant_updated_at
     #skip
     assert_equal merchant_attributes[:updated_at], merchant.updated_at
+  end
+
+  def test_finding_items_by_merchant_id
+    assert_equal 10, merchant.items('1').size
+  end
+
+  def test_finding_items_by_invoice
+    assert_equal 1, merchant.invoices('26').size
   end
 
 end
