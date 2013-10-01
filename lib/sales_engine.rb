@@ -15,6 +15,7 @@ class SalesEngine
 
   def initialize
     @invoice_repository      = InvoiceRepository.new(nil, self)
+    # @invoice_repository      = InvoiceRepository.new(self)
     @item_repository         = ItemRepository.new(nil, self)
     @invoice_item_repository = InvoiceItemRepository.new(nil, self)
     @customer_repository     = CustomerRepository.new(nil, self)

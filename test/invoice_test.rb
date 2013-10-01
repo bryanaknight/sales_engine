@@ -42,12 +42,20 @@ class InvoiceTest < MiniTest::Test
     assert_equal '2012-03-25 09:54:09 UTC', invoice.updated_at
   end
 
-  #def test_finds_transactions_related_to_invoices
-  #  assert_equal 1, invoice.transactions.size
-  #end
-#
-  #def test_finds_invoice_items_related_to_invoices
-  #  assert_equal 8, invoice.invoice_items('1').size
-  #end
+  def test_finds_transactions_related_to_invoices
+   assert_equal 1, invoice.transactions.size
+  end
+
+  def test_finds_invoice_items_related_to_invoices
+   assert_equal 8, invoice.invoice_items.size
+  end
+
+  def test_find_customer_related_to_invoice
+   assert_equal 'Joey', invoice.customer.first_name
+  end
+
+  def test_find_merchant_related_to_invoice
+    assert_equal 'Bechtelar, Jones and Stokes', invoice.merchant.name
+  end
 
 end

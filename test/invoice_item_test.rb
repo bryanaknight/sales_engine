@@ -58,13 +58,12 @@ class InvoiceItemsTest < MiniTest::Test
     assert_equal '2012-03-27 14:54:09 UTC', invoice_item.updated_at
   end
 
-  def test_invoices_returns_invoice_items
-    binding.pry
-    assert_equal 1, invoice_item.invoice.size
-  end
+  # def test_invoices_returns_invoice_items
+  #   assert_equal 1, invoice_item.invoice.size
+  # end
 
-  def test_invoices_returns_items
-    assert_equal 0, invoice_item.item.size
-  end
+  # def test_invoices_returns_items
+  #   assert_equal 0, invoice_item.item.size
+  # end
 
 end

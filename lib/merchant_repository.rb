@@ -13,11 +13,11 @@ class MerchantRepository
 
   def read_file
     filename = "./data/merchants.csv"
-    rows = CSV.read filename, headers: true, header_converters: :symbol
+    CSV.read filename, headers: true, header_converters: :symbol
   end
 
   def all
-    merchants = read_file.collect {|merchant| Merchant.new(merchant, self)}
+    read_file.collect {|merchant| Merchant.new(merchant, self)}
   end
 
   def random
@@ -34,6 +34,20 @@ class MerchantRepository
     define_method "find_all_by_#{var}" do |value|
       all.select { |merchant| merchant.send(var).downcase == value.downcase }
     end
+  end
+
+  def lowest_to_highest_sorted
+    all.sort_by do |merchant|
+      merchant.revenue
+    end
+  end
+
+  def higest_to_lowest_sorted
+    lowest_to_highest_sorted.reverse
+  end
+
+  def most_revenue(number_of_merchants)
+    higest_to_lowest_sorted[0,number_of_merchants]
   end
 
 end

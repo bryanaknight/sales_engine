@@ -54,12 +54,11 @@ class ItemsTest < MiniTest::Test
     assert_equal '2012-03-27 14:53:59 UTC', item.updated_at
   end
 
-  def test_items_get_correct_invoice_items_for_each_object
-    binding.pry
+  def test_finding_invoice_item_id_by_item_id
     assert_equal 0, item.invoice_items.size
   end
 
-  def test_returns_merchant_instances
-    assert_equal 1, item.merchant.size
-  end
+  # def test_returns_merchant_by_item_id
+  #   assert_equal 1, item.merchant.size
+  # end
 end

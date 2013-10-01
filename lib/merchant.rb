@@ -25,4 +25,8 @@ class Merchant
    invoice_repo.find_all_by_merchant_id(self.id)
   end
 
+
+  def revenue
+    rand(100)
+  end
 end

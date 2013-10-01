@@ -40,7 +40,7 @@ class MerchantTest < Minitest::Test
     assert_equal 10, merchant.items.size
   end
 
-  def test_finding_items_by_invoice
+  def test_finding_invoices_by_merchant_id
     assert_equal 0, merchant.invoices.size
   end
 end
