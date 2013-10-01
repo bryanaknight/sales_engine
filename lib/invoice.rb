@@ -30,14 +30,8 @@ class Invoice
   end
 
   def items
-    invoice_items.map do |invoice_item_objects|
-      invoice_item_objects.item_id
-    end
-
-    item = repo.engine.item_repository
-
-    yeah = happy.map do |items|
-      item.find_by_id(items)
+    invoice_items.map do |invoice_item|
+      invoice_item.item
     end
   end
 

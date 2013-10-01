@@ -1,4 +1,4 @@
-require "./lib/invoice_items"
+require "./lib/invoice_item"
 require "pry"
 require "csv"
 require './lib/sales_engine'
@@ -14,11 +14,11 @@ class InvoiceItemRepository
 
   def read_file
     filename = './data/invoice_items.csv'
-    rows = CSV.read filename, headers: true, header_converters: :symbol
+    CSV.read filename, headers: true, header_converters: :symbol
   end
 
   def all
-    invoice_items = read_file.collect {|invoice_item| InvoiceItems.new(invoice_item, self)}
+    read_file.collect {|row| InvoiceItem.new(row, self)}
   end
 
   def random

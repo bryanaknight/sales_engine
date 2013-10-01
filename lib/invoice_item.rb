@@ -1,6 +1,6 @@
 require './lib/sales_engine'
 
-class InvoiceItems
+class InvoiceItem
 
   attr_reader :id,
               :item_id,
@@ -23,8 +23,8 @@ class InvoiceItems
   end
 
   def invoice
-   invoice_repo = repo.engine.invoice_repository
-   invoice_repo.find_by_id(self.invoice_id)
+    invoice_repo = repo.engine.invoice_repository
+    invoice_repo.find_by_id(self.invoice_id)
   end
 
   def item
@@ -33,7 +33,6 @@ class InvoiceItems
   end
 
   def price
-    unit_price * quantity
+    unit_price.to_i * quantity.to_i
   end
-
 end

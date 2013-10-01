@@ -35,12 +35,11 @@ class InvoiceItemTest < MiniTest::Test
   end
 
   def test_quantity
-    #skip
-    assert_equal '5', invoice_item.quantity
+    assert_equal "5", invoice_item.quantity
   end
 
   def test_unit_price
-    assert_equal '13635', invoice_item.unit_price
+    assert_equal "13635", invoice_item.unit_price
   end
 
   def test_created_at
@@ -59,6 +58,10 @@ class InvoiceItemTest < MiniTest::Test
 
   def test_invoices_returns_items
     assert_equal "Item Quidem Suscipit", invoice_item.item.name
+  end
+
+  def test_price
+    assert_equal 68175, invoice_item.price
   end
 
 end

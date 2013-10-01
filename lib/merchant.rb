@@ -27,8 +27,7 @@ class Merchant
 
   def transactions
     invoices.map do |inv|
-
-    end
+   end
   end
 
   def paid_invoices
@@ -38,12 +37,12 @@ class Merchant
   end
 
   def revenue
-     sum = 0
+    sum = 0
     paid_invoices.each do |paid_invoice|
       sum += paid_invoice.total
     end
     return sum
   end
 
-  end
+  
 end
