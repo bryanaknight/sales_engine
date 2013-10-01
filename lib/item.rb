@@ -30,4 +30,12 @@ class Item
     merchant_repo = repo.engine.merchant_repository
     merchant_repo.find_by_id(self.merchant_id)
   end
+
+  def merchant_unit_price
+    invoice_repo = repo.engine.invoice_repository
+    successful_mt = invoice_repo.successful_merchant_transactions
+    successful_mt.map do |mt|
+      mt.find_by_unit_price
+    end
+  end
 end

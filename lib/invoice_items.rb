@@ -32,4 +32,8 @@ class InvoiceItems
     items_repo.find_by_id(self.item_id)
   end
 
+  def price
+    unit_price * quantity
+  end
+
 end
