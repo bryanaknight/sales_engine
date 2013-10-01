@@ -23,36 +23,36 @@ class InvoiceItemsTest < MiniTest::Test
     end
   end
 
-  def invoice_items
-    @invoice_items ||= InvoiceItems.new(item_attributes)
-  end
+  # def invoice_items
+  #   @invoice_items ||= InvoiceItems.new(item_attributes)
+  # end
 
-  def test_invoice_items_id
-    assert_equal item_attributes[:id], invoice_items.invoice_item_id
-  end
+  # def test_invoice_items_id
+  #   assert_equal item_attributes[:id], invoice_items.invoice_item_id
+  # end
 
-  def test_item_id
-    assert_equal item_attributes[:item_id], invoice_items.item_id
-  end
+  # def test_item_id
+  #   assert_equal item_attributes[:item_id], invoice_items.item_id
+  # end
 
-  def test_invoice_id
-    assert_equal item_attributes[:invoice_id], invoice_items.invoice_id
-  end
+  # def test_invoice_id
+  #   assert_equal item_attributes[:invoice_id], invoice_items.invoice_id
+  # end
 
-  def test_quantity
-    assert_equal item_attributes[:quantity], invoice_items.quantity
-  end
+  # def test_quantity
+  #   assert_equal item_attributes[:quantity], invoice_items.quantity
+  # end
 
-  def test_unit_price
-    assert_equal item_attributes[:unit_price], invoice_items.unit_price
-  end
+  # def test_unit_price
+  #   assert_equal item_attributes[:unit_price], invoice_items.unit_price
+  # end
 
-  def test_created_at
-    assert_equal item_attributes[:created_at], invoice_items.created_at
-  end
+  # def test_created_at
+  #   assert_equal item_attributes[:created_at], invoice_items.created_at
+  # end
 
-  def test_updated_at
-    assert_equal item_attributes[:updated_at], invoice_items.updated_at
-  end
+  # def test_updated_at
+  #   assert_equal item_attributes[:updated_at], invoice_items.updated_at
+  # end
 
 end
