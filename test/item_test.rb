@@ -58,7 +58,7 @@ class ItemsTest < MiniTest::Test
     assert_equal 0, item.invoice_items.size
   end
 
-  # def test_returns_merchant_by_item_id
-  #   assert_equal 1, item.merchant.size
-  # end
+  def test_returns_merchant_by_item_id
+    assert_equal 'Schroeder-Jerde', item.merchant.name
+  end
 end

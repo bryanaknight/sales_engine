@@ -4,6 +4,7 @@ require "minitest/pride"
 require "./lib/invoice"
 require "csv"
 require './lib/invoice_repository'
+require 'pry'
 
 class InvoiceTest < MiniTest::Test
   attr_reader :engine,
@@ -56,6 +57,10 @@ class InvoiceTest < MiniTest::Test
 
   def test_find_merchant_related_to_invoice
     assert_equal 'Bechtelar, Jones and Stokes', invoice.merchant.name
+  end
+
+  def test_find_items_by_way_of_invoice_items_by_invoice_id
+    assert_equal 1 , invoice.items.compact.size  
   end
 
 end

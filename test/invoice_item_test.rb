@@ -1,12 +1,12 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/invoice_items'
+require './lib/invoice_item'
 require 'csv'
 require './lib/invoice_item_repository'
 
 
-class InvoiceItemsTest < MiniTest::Test
+class InvoiceItemTest < MiniTest::Test
   attr_reader :engine,
               :repo,
               :invoice_items,
@@ -19,12 +19,7 @@ class InvoiceItemsTest < MiniTest::Test
     @invoice_item = invoice_items.first
   end
 
-  # def invoice_items
-  #   #skip
-  #   @invoice_items ||= InvoiceItems.new(item_attributes, @repo)
-  # end
-
-  def test_invoice_items_id
+  def test_invoice_item_id
     #skip
     assert_equal '1', invoice_item.id
   end
@@ -58,12 +53,12 @@ class InvoiceItemsTest < MiniTest::Test
     assert_equal '2012-03-27 14:54:09 UTC', invoice_item.updated_at
   end
 
-  # def test_invoices_returns_invoice_items
-  #   assert_equal 1, invoice_item.invoice.size
-  # end
+  def test_invoice_returns_invoice_by_invoice_item_id
+    assert_equal '26', invoice_item.invoice.merchant_id
+  end
 
-  # def test_invoices_returns_items
-  #   assert_equal 0, invoice_item.item.size
-  # end
+  def test_invoices_returns_items
+    assert_equal "Item Quidem Suscipit", invoice_item.item.name
+  end
 
 end
