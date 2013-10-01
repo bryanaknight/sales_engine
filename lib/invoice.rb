@@ -30,8 +30,7 @@ class Invoice
   end
 
   def items
-
-    happy = invoice_items.map do |invoice_item_objects|
+    invoice_items.map do |invoice_item_objects|
       invoice_item_objects.item_id
     end
 
@@ -40,7 +39,6 @@ class Invoice
     yeah = happy.map do |items|
       item.find_by_id(items)
     end
-
   end
 
   def customer
@@ -51,6 +49,24 @@ class Invoice
   def merchant
     merchant_repo = repo.engine.merchant_repository
     merchant_repo.find_by_id(self.merchant_id)
+  end
+
+  def successful_transactions
+    transactions.select do |trans|
+      trans.successful?
+    end
+  end
+
+  def paid?
+    not successful_transactions.empty?
+  end
+
+  def total
+    sum = 0
+    invoice_items.each do |item|
+      sum += item.price
+    end
+    return sum
   end
 
 end

@@ -41,6 +41,7 @@ class MerchantTest < Minitest::Test
   end
 
   def test_finding_invoices_by_merchant_id
+    binding.pry
     assert_equal 0, merchant.invoices.size
   end
 end

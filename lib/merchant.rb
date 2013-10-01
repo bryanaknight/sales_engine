@@ -25,8 +25,25 @@ class Merchant
    invoice_repo.find_all_by_merchant_id(self.id)
   end
 
+  def transactions
+    invoices.map do |inv|
+
+    end
+  end
+
+  def paid_invoices
+    invoices.select do |inv|
+      inv.paid?
+    end
+  end
 
   def revenue
-    rand(100)
+     sum = 0
+    paid_invoices.each do |paid_invoice|
+      sum += paid_invoice.total
+    end
+    return sum
+  end
+
   end
 end

@@ -26,4 +26,9 @@ attr_reader   :id,
     invoice_repo.find_by_id(self.invoice_id)
   end
 
+  #write test for this
+  def successful?
+    result == 'success'
+  end
+
 end
