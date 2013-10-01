@@ -54,10 +54,7 @@ class MerchantTest < Minitest::Test
 
   def test_revenue
     assert_equal 0, merchant.revenue
-  end
-
-  def test_revenue_by_date
-    assert_equal [], merchant.revenue_by('2012-03-25 09:54:09 UTC')
+    #add revenue(date test)
   end
 
 

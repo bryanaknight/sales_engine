@@ -37,21 +37,49 @@ class Merchant
     end
   end
 
-  def revenue
-    sum = 0
-    paid_invoices.each do |paid_invoice|
-      sum += paid_invoice.total
-    end
-    return sum
-  end
-
-  def revenue_by(date)
-    paid_invoices.each do |paid_invoice|
-      if paid_invoice.created_at == date
-        return revenue
-      end
+  def revenue(date = nil)
+    if date.nil?
+      estimate_revenue(paid_invoices)
+    else
+      estimate_revenue(paid_invoices_by_date(date))
     end
   end
 
+  private
 
+  def estimate_revenue(invoices)
+    invoices.collect do |invoice|
+      invoice.total
+    end.reduce(0, :+)
+  end
+
+  def paid_invoices_by_date(date)
+    paid_invoices.select { |paid_invoice| paid_invoice.created_at == date }
+  end
+
+  # def revenue(date = nil)
+  #   if date.nil?
+  #     paid_invoices.collect do |paid_invoice|
+  #       paid_invoice.total
+  #     end.reduce(0, :+)
+  #   else
+  #     paid_invoices.collect do |paid_invoice|
+  #       revenue if paid_invoice.created_at == date
+  #     end.reduce(0, :+)
+  #   end
+  # end
+
+  # def revenue
+  #   paid_invoices.collect do |paid_invoice|
+  #     paid_invoice.total
+  #   end.reduce(0, :+)
+  # end
+
+  # def revenue(date)
+  #   paid_invoices.each do |paid_invoice|
+  #     if paid_invoice.created_at == date
+  #       return revenue
+  #     end
+  #   end
+  # end
 end
