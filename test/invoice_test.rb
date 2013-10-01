@@ -71,4 +71,8 @@ class InvoiceTest < MiniTest::Test
     assert invoice.paid?
   end
 
+  def test_total
+    assert_equal 2106777, invoice.total
+  end
+
 end

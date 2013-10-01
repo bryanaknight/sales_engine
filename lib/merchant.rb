@@ -1,4 +1,5 @@
 require './lib/merchant_repository'
+require 'pry'
 
 class Merchant
   attr_reader :id,
@@ -44,5 +45,13 @@ class Merchant
     return sum
   end
 
-  
+  def revenue_by(date)
+    paid_invoices.each do |paid_invoice|
+      if paid_invoice.created_at == date
+        return revenue
+      end
+    end
+  end
+
+
 end

@@ -50,4 +50,8 @@ class MerchantRepositoryTest < MiniTest::Test
     20.times {results << mr.random}
     assert results.uniq.count > 1
   end
+
+  def test_most_revenue
+    assert_equal "26", mr.most_revenue(10).first.id
+  end
 end

@@ -5,6 +5,7 @@ require "./lib/merchant"
 require "csv"
 require './lib/merchant_repository'
 require "./lib/sales_engine"
+require 'pry'
 
 class MerchantTest < Minitest::Test
   attr_reader :engine,
@@ -43,4 +44,21 @@ class MerchantTest < Minitest::Test
   def test_finding_invoices_by_merchant_id
     assert_equal 0, merchant.invoices.size
   end
+
+  def test_paid_invoices
+    paid_invoices = merchant.invoices.select do |inv|
+      inv.paid? 
+    end
+    paid_invoices.include?(merchant)
+  end
+
+  def test_revenue
+    assert_equal 0, merchant.revenue
+  end
+
+  def test_revenue_by_date
+    assert_equal [], merchant.revenue_by('2012-03-25 09:54:09 UTC')
+  end
+
+
 end
