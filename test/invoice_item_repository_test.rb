@@ -6,11 +6,12 @@ require "./lib/sales_engine"
 
 class InvoiceItemRepositoryTest < MiniTest::Test
 
-  attr_reader :invoiceitems, :engine
+  attr_reader :invoiceitems,
+              :engine
 
   def setup
     @engine       = SalesEngine.new
-    @invoiceitems = InvoiceItemRepository.new(nil, @engine)
+    @invoiceitems = engine.invoice_item_repository
   end
 
   def test_invoice_item_objects_are_created
@@ -34,7 +35,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
 
   def test_find_by_quantity
     #skip
-    assert_equal '5', invoiceitems.find_by_quantity('5').quantity
+    assert_equal 1, invoiceitems.find_by_quantity('9').quantity
   end
 
   def test_find_by_unit_price
@@ -58,7 +59,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_find_all_by_invoice_id
-    #skip
+    # skip
     assert_equal 2, invoiceitems.find_all_by_invoice_id('2').size
   end
 
@@ -68,12 +69,12 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_find_all_by_unit_price
-    #skip
+    # skip
     assert_equal 1, invoiceitems.find_all_by_unit_price('1859').size
   end
 
   def test_find_by_quantity
-    #skip
+    # skip
     assert_equal 2, invoiceitems.find_all_by_quantity('5').size
   end
 

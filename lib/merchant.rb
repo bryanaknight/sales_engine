@@ -4,7 +4,7 @@ class Merchant
   attr_reader :id,
               :name,
               :created_at,
-              :updated_at
+              :updated_at,
               :repo
 
   def initialize (attribute, repo)
@@ -15,14 +15,14 @@ class Merchant
     @repo       = repo
   end
 
-  def items(value)
-    item_repo = @repo.engine.item_repository
-    item_repo.find_all_by_merchant_id(value)
+  def items
+    item_repo = repo.engine.item_repository
+    item_repo.find_all_by_merchant_id(self.id)
   end
 
-  def invoices(value)
-   invoice_repo = @repo.engine.invoice_repository
-   invoice_repo.find_all_by_merchant_id(value)
+  def invoices
+   invoice_repo = repo.engine.invoice_repository
+   invoice_repo.find_all_by_merchant_id(self.id)
   end
 
 end

@@ -21,10 +21,10 @@ class Item
     @repo        = repo
   end
 
-  #def invoice_items
-  #  invoic_item_repo = engine.invoice_item_repository
-  #  invoic_item_repo.find_all_by_invoice_item_id(id)
-  #end
+  def invoice_items
+    invoice_item_repo = engine.invoice_item_repository
+    invoice_item_repo.find_all_by_id(self.id)
+  end
 #
   #def merchant
   #  merchant_repo = engine.merchant_repository

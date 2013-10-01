@@ -19,15 +19,8 @@ class Invoice
     @repo        = repo
   end
 
-  def transactions(value)
-    trans_repo = @repo.engine.transaction_repository
-    trans_repo.find_all_by_invoice_id(value)
-    #returns a collection of associated transaction instances
-  end
+  def transactions
 
-  def invoice_items(value)
-    invoice_item_repo = @repo.engine.invoice_item_repository
-    invoice_item_repo.find_all_by_invoice_id(value)
   end
 
 end

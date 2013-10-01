@@ -7,61 +7,64 @@ require './lib/invoice_item_repository'
 
 
 class InvoiceItemsTest < MiniTest::Test
-  attr_reader :repo
+  attr_reader :engine,
+              :repo,
+              :invoice_items,
+              :invoice_item
 
-  def contents
-    CSV.read "./data/invoice_items.csv", headers: true, header_converters: :symbol
+  def setup
+    @engine = SalesEngine.new
+    @repo = engine.invoice_item_repository
+    @invoice_items = engine.invoice_item_repository.all
+    @invoice_item = invoice_items.first
   end
 
-  def item_attributes
-    contents.each do |row|
-      id         = row[:id]
-      item_id    = row[:item_id]
-      invoice_id = row[:invoice_id]
-      quantity   = row[:quantity]
-      unit_price = row[:unit_price]
-      created_at = row[:created_at]
-      updated_at = row[:updated_at]
-    end
-  end
-
-  def invoice_items
-    #skip
-    @invoice_items ||= InvoiceItems.new(item_attributes, @repo)
-  end
+  # def invoice_items
+  #   #skip
+  #   @invoice_items ||= InvoiceItems.new(item_attributes, @repo)
+  # end
 
   def test_invoice_items_id
     #skip
-    assert_equal item_attributes[:id], invoice_items.id
+    assert_equal '1', invoice_item.id
   end
 
   def test_item_id
     #skip
-    assert_equal item_attributes[:item_id], invoice_items.item_id
+    assert_equal '539', invoice_item.item_id
   end
 
   def test_invoice_id
     #skip
-    assert_equal item_attributes[:invoice_id], invoice_items.invoice_id
+    assert_equal '1', invoice_item.invoice_id
   end
 
   def test_quantity
     #skip
-    assert_equal item_attributes[:quantity], invoice_items.quantity
+    assert_equal '5', invoice_item.quantity
   end
 
   def test_unit_price
-    assert_equal item_attributes[:unit_price], invoice_items.unit_price
+    assert_equal '13635', invoice_item.unit_price
   end
 
   def test_created_at
     #skip
-    assert_equal item_attributes[:created_at], invoice_items.created_at
+    assert_equal '2012-03-27 14:54:09 UTC', invoice_item.created_at
   end
 
   def test_updated_at
     #skip
-    assert_equal item_attributes[:updated_at], invoice_items.updated_at
+    assert_equal '2012-03-27 14:54:09 UTC', invoice_item.updated_at
+  end
+
+  def test_invoices_returns_invoice_items
+    # binding.pry
+    assert_equal 1, invoice_item.invoices.size
+  end
+
+  def test_invoices_returns_items
+    assert_equal 1, invoice_item.items.size
   end
 
 end

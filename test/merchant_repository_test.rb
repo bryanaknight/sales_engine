@@ -14,7 +14,6 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_find_by_name
-
     assert_equal 'Schroeder-Jerde', mr.find_by_name('Schroeder-Jerde').name
   end
 

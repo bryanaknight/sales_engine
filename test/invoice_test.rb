@@ -6,61 +6,48 @@ require "csv"
 require './lib/invoice_repository'
 
 class InvoiceTest < MiniTest::Test
-  attr_reader :repo,
-              :engine,
+  attr_reader :engine,
+              :repo,
+              :invoices,
               :invoice
-
-  def contents
-    contents = CSV.read "./data/invoices.csv", headers: true, header_converters: :symbol
-  end
-
-  def invoice_attributes
-    contents.each do |attribute|
-      id          = attribute[:id]
-      customer_id = attribute[:customer_id]
-      merchant_id = attribute[:merchant_id]
-      status      = attribute[:status]
-      created_at  = attribute[:created_at]
-      updated_at  = attribute[:updated_at]
-    end
-  end
 
   def setup
     @engine = SalesEngine.new
-    @repo = InvoiceRepository.new(nil, @engine)
-    @invoice = Invoice.new(invoice_attributes, @repo)
+    @repo = engine.invoice_repository
+    @invoices = engine.invoice_repository.all
+    @invoice = invoices.first
   end
 
   def test_it_gets_item_id
-    assert_equal invoice_attributes[:id], invoice.id
+    assert_equal '1', invoice.id
   end
 
   def test_it_gets_customer_id
-    assert_equal invoice_attributes[:customer_id], invoice.customer_id
+    assert_equal '1', invoice.customer_id
   end
 
-  def test_it_gets_unit_price
-    assert_equal invoice_attributes[:status], invoice.status
+  def test_it_gets_status
+    assert_equal 'shipped', invoice.status
   end
 
   def test_it_gets_merchant_id
-    assert_equal invoice_attributes[:merchant_id], invoice.merchant_id
+    assert_equal '26', invoice.merchant_id
   end
 
   def test_it_gets_created_at
-    assert_equal invoice_attributes[:created_at], invoice.created_at
+    assert_equal '2012-03-25 09:54:09 UTC', invoice.created_at
   end
 
   def test_it_gets_updated_at
-    assert_equal invoice_attributes[:updated_at], invoice.updated_at
+    assert_equal '2012-03-25 09:54:09 UTC', invoice.updated_at
   end
 
-  def test_finds_transactions_related_to_invoices
-    assert_equal 1, invoice.transactions('1').size
-  end
-
-  def test_finds_invoice_items_related_to_invoices
-    assert_equal 8, invoice.invoice_items('1').size
-  end
+  #def test_finds_transactions_related_to_invoices
+  #  assert_equal 1, invoice.transactions.size
+  #end
+#
+  #def test_finds_invoice_items_related_to_invoices
+  #  assert_equal 8, invoice.invoice_items('1').size
+  #end
 
 end
