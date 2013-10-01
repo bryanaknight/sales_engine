@@ -4,6 +4,7 @@ require "minitest/pride"
 require "./lib/item"
 require "csv"
 require './lib/item_repository'
+require "./lib/sales_engine"
 
 class ItemsTest < MiniTest::Test
   attr_reader :repo,
@@ -20,36 +21,45 @@ class ItemsTest < MiniTest::Test
 
   def test_it_gets_item_id
     #skip
-    assert_equal item_attributes[:id], item.id
+    assert_equal '1', item.id
   end
 
   def test_it_gets_name
     #skip
-    assert_equal item_attributes[:name], item.name
+    assert_equal 'Item Qui Esse', item.name
   end
 
   def test_it_gets_description
     #skip
-    assert_equal item_attributes[:description], item.description
+    assert_equal "Nihil autem sit odio ", item.description
   end
 
   def test_it_gets_unit_price
     #skip
-    assert_equal item_attributes[:unit_price], item.unit_price
+    assert_equal '75107', item.unit_price
   end
 
   def test_it_gets_merchant_id
     #skip
-    assert_equal item_attributes[:merchant_id], item.merchant_id
+    assert_equal '1', item.merchant_id
   end
 
   def test_it_gets_created_at
     #skip
-    assert_equal item_attributes[:created_at], item.created_at
+    assert_equal '2012-03-27 14:53:59 UTC', item.created_at
   end
 
   def test_it_gets_updated_at
     #skip
-    assert_equal item_attributes[:updated_at], item.updated_at
+    assert_equal '2012-03-27 14:53:59 UTC', item.updated_at
+  end
+
+  def test_items_get_correct_invoice_items_for_each_object
+    binding.pry
+    assert_equal 0, item.invoice_items.size
+  end
+
+  def test_returns_merchant_instances
+    assert_equal 1, item.merchant.size
   end
 end

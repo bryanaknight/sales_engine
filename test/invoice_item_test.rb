@@ -59,12 +59,12 @@ class InvoiceItemsTest < MiniTest::Test
   end
 
   def test_invoices_returns_invoice_items
-    # binding.pry
-    assert_equal 1, invoice_item.invoices.size
+    binding.pry
+    assert_equal 1, invoice_item.invoice.size
   end
 
   def test_invoices_returns_items
-    assert_equal 1, invoice_item.items.size
+    assert_equal 0, invoice_item.item.size
   end
 
 end

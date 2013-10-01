@@ -21,28 +21,9 @@ attr_reader   :id,
     @repo                        = repo
   end
 
-  #def transactions
-  #  transaction_repo = engine.transaction_repository
-  #  transaction_repo.find_all_by_transaction_id(id)
-  #end
-#
-  #def invoice_items
-  #  invoic_item_repo = engine.invoice_item_repository
-  #  invoic_item_repo.find_all_by_invoice_item_id(id)
-  #end
-#
-  #def items
-  #  item_repo = engine.invoice_item_repository
-  #  item_repo.find_all_by_invoice_item_id(id)
-  #end
-#
-  #def customers
-  #  customer_repo = engine.customer_repository
-  #  customer_repo.find_all_by_customer_id(id)
-  #end
-#
-  #def merchants
-  #  merchant_repo = engine.merchant_repository
-  #  merchant_repo.find_all_by_merchant_id(id)
-  #end
+  def invoice
+    invoice_repo = repo.engine.invoice_repository
+    invoice_repo.find_by_id(self.invoice_id)
+  end
+
 end

@@ -17,4 +17,8 @@ class Customer
     @repo        = repo
   end
 
+  def invoices
+    invoice_repo = repo.engine.invoice_repository
+    invoice_repo.find_all_by_customer_id(self.id)
+  end
 end

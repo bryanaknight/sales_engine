@@ -22,12 +22,12 @@ class Item
   end
 
   def invoice_items
-    invoice_item_repo = engine.invoice_item_repository
-    invoice_item_repo.find_all_by_id(self.id)
+    invoice_item_repo = repo.engine.invoice_item_repository
+    invoice_item_repo.find_all_by_item_id(self.id)
   end
-#
-  #def merchant
-  #  merchant_repo = engine.merchant_repository
-  #  merchant_repo.find_all_by_merchant_id(id)
-  #end
+
+  def merchant
+    merchant_repo = repo.engine.merchant_repository
+    merchant_repo.find_by_id(self.merchant_id)
+  end
 end
