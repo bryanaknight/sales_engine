@@ -51,9 +51,20 @@ class MerchantRepository
   end
 
   def revenue(date)
-    all.reduce(0) do |merchant, sum|
+    all.reduce(0) do |sum, merchant|
       sum += merchant.revenue(date)
     end
   end
 
+  def most_items(number_it_items)
+    items_sold_array = all.sort_by do |merchant|
+      merchant.items_sold
+    end.reverse
+
+    items_sold_array.take(number_it_items)
+  end    
+  
+
 end
+
+

@@ -37,6 +37,30 @@ class Merchant
     end
   end
 
+  def invoice_items
+    ii_repo = repo.engine.invoice_item_repository
+    items.select do |item|
+      ii_repo.select do |ii|
+        ii.item_id == item.id
+      end
+    end
+  end
+
+  def item_quantities
+    invoice_items.each_object(Hash.new(0)) do |invoice_item, hash|
+      hash[invoice_item] += invoice_item.quantity
+    end
+  end
+  #hash with items and quantities
+
+  def items_sold
+    sum = 0
+    items_quantities.values.each do |value|
+      sum += items_quantities.value
+    end
+    return sum 
+  end
+        
   def revenue(date = nil)
     if date.nil?
       estimate_revenue(paid_invoices)

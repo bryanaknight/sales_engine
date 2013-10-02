@@ -54,4 +54,8 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_most_revenue
     assert_equal "26", mr.most_revenue(10).first.id
   end
+
+  def test_revenue_by_date_for_all_merchants
+    assert_equal 2106777, mr.revenue('2012-03-25 09:54:09 UTC')
+  end
 end

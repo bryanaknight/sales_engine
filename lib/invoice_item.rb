@@ -35,4 +35,8 @@ class InvoiceItem
   def price
     unit_price.to_i * quantity.to_i
   end
+
+  def invoice_item_quantity
+    self.quantity
+  end
 end
