@@ -21,14 +21,23 @@ class Merchant
     item_repo.find_all_by_merchant_id(self.id)
   end
 
+  def successful_invoice_items
+    paid_invoices.map do |paid_invoice|
+      paid_invoice.invoice_items
+    end
+  end
+
+  def quantity
+    successful_invoice_items.map do |invoice_items|
+      invoice_items.map do |invoice_item|
+        invoice_item.quantity.to_i #quantity for one merchant!!!
+      end.reduce(0, :+)
+    end
+  end
+
   def invoices
    invoice_repo = repo.engine.invoice_repository
    invoice_repo.find_all_by_merchant_id(self.id)
-  end
-
-  def transactions
-    invoices.map do |inv|
-   end
   end
 
   def paid_invoices
@@ -57,16 +66,5 @@ class Merchant
     paid_invoices.select { |paid_invoice| paid_invoice.created_at == date }
   end
 
-  # def revenue(date = nil)
-  #   if date.nil?
-  #     paid_invoices.collect do |paid_invoice|
-  #       paid_invoice.total
-  #     end.reduce(0, :+)
-  #   else
-  #     paid_invoices.collect do |paid_invoice|
-  #       revenue if paid_invoice.created_at == date
-  #     end.reduce(0, :+)
-  #   end
-  # end
 
 end

@@ -36,6 +36,20 @@ class MerchantRepository
     end
   end
 
+  def lowest_to_highest_quantity
+    all.sort_by do |merchant|
+      merchant.quantity
+    end
+  end
+
+  def higest_to_lowest_quantity
+    lowest_to_highest_quantity.reverse
+  end
+
+  def most_items(number_of_merchants)
+    higest_to_lowest_quantity[0,number_of_merchants]
+  end
+
   def lowest_to_highest_sorted
     all.sort_by do |merchant|
       merchant.revenue

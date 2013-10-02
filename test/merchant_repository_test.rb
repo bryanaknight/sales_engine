@@ -52,6 +52,7 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_most_revenue
+    binding.pry
     assert_equal "26", mr.most_revenue(10).first.id
   end
 end
