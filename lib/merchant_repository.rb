@@ -50,4 +50,10 @@ class MerchantRepository
     higest_to_lowest_sorted[0,number_of_merchants]
   end
 
+  def revenue(date)
+    all.reduce(0) do |merchant, sum|
+      sum += merchant.revenue(date)
+    end
+  end
+
 end

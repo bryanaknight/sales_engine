@@ -69,17 +69,4 @@ class Merchant
   #   end
   # end
 
-  # def revenue
-  #   paid_invoices.collect do |paid_invoice|
-  #     paid_invoice.total
-  #   end.reduce(0, :+)
-  # end
-
-  # def revenue(date)
-  #   paid_invoices.each do |paid_invoice|
-  #     if paid_invoice.created_at == date
-  #       return revenue
-  #     end
-  #   end
-  # end
 end
