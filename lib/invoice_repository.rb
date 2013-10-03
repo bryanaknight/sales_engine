@@ -16,7 +16,7 @@ class InvoiceRepository
     @invoices ||= read_file.collect {|invoice| Invoice.new(invoice, self) }
   end
 
-  def random_invoice_object
+  def random
     all.sample
   end
 

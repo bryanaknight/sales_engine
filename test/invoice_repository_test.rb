@@ -75,7 +75,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_get_random_invoice_object
     results = []
-    30.times{ results << invoices.all }
+    10.times{ results << invoices.random }
     assert results.uniq.count > 1
   end
 end
