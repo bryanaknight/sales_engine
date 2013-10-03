@@ -67,8 +67,12 @@ class InvoiceTest < MiniTest::Test
     assert_equal 1, invoice.successful_transactions.size
   end
 
-  def test_paid
+  def test_paid?
     assert invoice.paid?
+  end
+
+  def test_not_paid?
+    refute invoice.not_paid?
   end
 
   def test_total

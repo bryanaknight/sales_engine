@@ -57,12 +57,12 @@ class TransactionTest < MiniTest::Test
     assert_equal "26", transaction.invoice.merchant_id
   end
 
-  def test_transaction_successful
-    assert 'success', transaction.successful?
+  def test_transaction_successful?
+    assert transaction.successful?
   end
 
-  def test_transaction_fails
-    assert 'fails', transaction.failed
+  def test_transaction_failed?
+    refute transaction.failed?
   end
 
 end
