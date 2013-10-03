@@ -31,7 +31,7 @@ class Item
 
   def not_paid_items?
     invoice_items.map do |inv_item|
-      inv_item.not_paid_invoice
+      inv_item.not_paid_invoice_item?
     end
   end
 

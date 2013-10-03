@@ -65,7 +65,7 @@ class InvoiceItemTest < MiniTest::Test
   end
 
   def test_not_paid_invoice
-    assert invoice_item.not_paid_invoice?
+    refute invoice_item.not_paid_invoice_item?
   end
 
 end

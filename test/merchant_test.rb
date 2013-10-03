@@ -50,6 +50,6 @@ class MerchantTest < Minitest::Test
 
   def test_customers_with_pending_invoices
     merchant_34 = merchants[33].customers_with_pending_invoices
-    assert_equal 2, merchant_34.size
+    assert_equal 1, merchant_34.size
   end
 end
