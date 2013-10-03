@@ -1,12 +1,3 @@
-gem "minitest"
-require "minitest/autorun"
-require "minitest/pride"
-require "./lib/merchant"
-require "csv"
-require './lib/merchant_repository'
-require "./lib/sales_engine"
-require 'pry'
-
 class MerchantTest < Minitest::Test
   attr_reader :engine,
               :repo,
@@ -43,15 +34,6 @@ class MerchantTest < Minitest::Test
 
   def test_finding_invoices_by_merchant_id
     assert_equal 1, merchant.invoices.size
-  end
-
-  def test_paid_invoices
-    #Lol please tell me how we are testing this!!!
-    #To tired to try and figure it out
-    paid_invoices = merchant.invoices.select do |inv|
-      inv.paid?
-    end
-    paid_invoices.include?(merchant)
   end
 
   def test_revenue

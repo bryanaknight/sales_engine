@@ -1,5 +1,3 @@
-require "./lib/item_repository"
-
 class Item
      attr_reader :id,
                  :name,

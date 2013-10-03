@@ -1,5 +1,3 @@
-require './lib/sales_engine'
-
 class InvoiceItem
 
   attr_reader :id,

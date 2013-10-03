@@ -1,8 +1,3 @@
-require "./lib/item"
-require "pry"
-require "csv"
-require './lib/sales_engine'
-
 class ItemRepository
  attr_reader :filename, :engine
   def initialize(filename = "./data/items.csv", engine)
@@ -16,7 +11,7 @@ class ItemRepository
   end
 
   def all
-    items_list = read_file.collect {|item| Item.new(item, self) }
+    @items_list ||= read_file.collect {|item| Item.new(item, self) }
   end
 
   #This is some random shit!!!

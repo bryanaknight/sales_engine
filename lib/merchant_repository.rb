@@ -1,8 +1,3 @@
-require "./lib/merchant"
-require "pry"
-require "csv"
-require './lib/sales_engine'
-
 class MerchantRepository
  attr_reader :filename,
              :engine

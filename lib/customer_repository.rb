@@ -1,8 +1,3 @@
-require './lib/customer'
-require "pry"
-require "csv"
-require "./lib/sales_engine"
-
 class CustomerRepository
  attr_reader :filename,
              :engine
@@ -21,7 +16,7 @@ class CustomerRepository
   end
 
   def all
-    customers = read_file.collect { |customer| Customer.new(customer, self) }
+    @customers ||= read_file.collect { |customer| Customer.new(customer, self) }
   end
 
   def random

@@ -13,7 +13,7 @@ class InvoiceRepository
   end
 
   def all
-    invoices = read_file.collect {|invoice| Invoice.new(invoice, self) }
+    @invoices ||= read_file.collect {|invoice| Invoice.new(invoice, self) }
   end
 
   def random_invoice_object

@@ -1,8 +1,3 @@
-require "pry"
-require "csv"
-require './lib/transaction'
-require './lib/sales_engine'
-
 class TransactionRepository
  attr_reader :filename,
              :engine

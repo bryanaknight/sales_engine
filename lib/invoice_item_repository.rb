@@ -1,8 +1,3 @@
-require "./lib/invoice_item"
-require "pry"
-require "csv"
-require './lib/sales_engine'
-
 class InvoiceItemRepository
  attr_reader :filename,
               :engine
@@ -18,7 +13,7 @@ class InvoiceItemRepository
   end
 
   def all
-    read_file.collect {|row| InvoiceItem.new(row, self)}
+    @all ||= read_file.collect {|row| InvoiceItem.new(row, self)}
   end
 
   def random

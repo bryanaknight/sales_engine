@@ -1,5 +1,3 @@
-require './lib/transaction_repository'
-
 class Transaction
 attr_reader   :id,
               :invoice_id,
