@@ -14,8 +14,8 @@ class Invoice
     @customer_id = attribute[:customer_id]
     @merchant_id = attribute[:merchant_id]
     @status      = attribute[:status]
-    @created_at  = attribute[:created_at]
-    @updated_at  = attribute[:updated_at]
+    @created_at  = DateTime.parse(attribute[:created_at]).strftime("%Y-%M-%d")
+    @updated_at  = DateTime.parse(attribute[:updated_at]).strftime("%Y-%M-%d")
     @repo        = repo
   end
 

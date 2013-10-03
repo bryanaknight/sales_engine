@@ -1,8 +1,3 @@
-require "./lib/invoice"
-require "./lib/sales_engine"
-require "pry"
-require "csv"
-
 class InvoiceRepository
  attr_reader :filename,
              :engine

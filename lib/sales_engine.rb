@@ -1,3 +1,8 @@
+require 'date'
+require 'bigdecimal'
+require 'pry'
+require 'csv'
+require "./lib/invoice"
 require './lib/invoice_repository'
 require './lib/item_repository'
 require './lib/invoice_item_repository'
