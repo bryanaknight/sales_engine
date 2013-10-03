@@ -59,10 +59,14 @@ class MerchantTest < Minitest::Test
   end
 
   def test_favorite_customer
-    #Only test Public API - How do other objects in the system communicate with this object
-    #Behavoiur - When you call a mehtod in your class the right thing happens
-    #Implementation -How it achieves what it achieves Never
+    #Public API test - How do other objects in the system communicate with this object
+    #Behavoiur test - When you call a mehtod in your class the right thing happens
+    #Implementation - How it achieves what it achieves Never
     assert_equal 'Parker', merchant.favorite_customer.first_name
+  end
+
+  def test_revenue_by_date
+    assert_equal 196405, merchants[32].revenue("2012-03-24 15:54:10 UTC")
   end
 
   def test_customers_with_pending_invoices
