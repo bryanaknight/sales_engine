@@ -51,7 +51,7 @@ class Invoice
 
   def failed_transactions
     transactions.select do |trans|
-      trans.failed
+      trans.failed?
     end
   end
 

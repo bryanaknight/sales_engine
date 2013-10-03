@@ -61,4 +61,8 @@ class ItemsTest < MiniTest::Test
   def test_returns_merchant_by_item_id
     assert_equal 'Schroeder-Jerde', item.merchant.name
   end
+
+  def test_revenue
+    assert_equal 68175, items.last.revenue
+  end
 end
