@@ -45,7 +45,7 @@ class MerchantTest < Minitest::Test
   end
 
   def test_revenue_by_date
-    assert_equal 196405, merchants[32].revenue("2012-03-24 15:54:10 UTC")
+    assert_equal 196405, merchants[32].revenue("2012-03-24")
   end
 
   def test_customers_with_pending_invoices
