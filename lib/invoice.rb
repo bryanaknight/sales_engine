@@ -12,8 +12,8 @@ class Invoice
     @customer_id = attribute[:customer_id]
     @merchant_id = attribute[:merchant_id]
     @status      = attribute[:status]
-    @created_at  = DateTime.parse(attribute[:created_at]).strftime("%Y-%M-%d")
-    @updated_at  = DateTime.parse(attribute[:updated_at]).strftime("%Y-%M-%d")
+    @created_at  = DateTime.parse(attribute[:created_at]).strftime("%Y-%m-%d")
+    @updated_at  = DateTime.parse(attribute[:updated_at]).strftime("%Y-%m-%d")
     @repo        = repo
   end
 
@@ -56,7 +56,7 @@ class Invoice
   end
 
   def not_paid?
-    not successful_transactions.any?
+    not failed_transactions.empty?
   end
 
   def paid?

@@ -34,12 +34,12 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_find_by_created_at
    # skip
-    assert_equal '2012-03-25 09:54:09 UTC', invoices.find_by_created_at('2012-03-25 09:54:09 UTC').created_at
+    assert_equal '2012-03-25', invoices.find_by_created_at('2012-03-25').created_at
   end
 
   def test_find_by_updated_at
    # skip
-    assert_equal '2012-03-25 09:54:09 UTC', invoices.find_by_updated_at('2012-03-25 09:54:09 UTC').updated_at
+    assert_equal '2012-03-25', invoices.find_by_updated_at('2012-03-25').updated_at
   end
 
 
@@ -65,12 +65,12 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_find_all_by_created_at
     #skip
-    assert_equal 1, invoices.find_all_by_created_at('2012-03-25 09:54:09 UTC').size
+    assert_equal 1, invoices.find_all_by_created_at('2012-03-25').size
   end
 
   def test_find_all_by_updated_at
     #skip
-    assert_equal 1, invoices.find_all_by_updated_at('2012-03-25 09:54:09 UTC').size
+    assert_equal 1, invoices.find_all_by_updated_at('2012-03-25').size
   end
 
   def test_get_random_invoice_object
