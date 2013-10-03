@@ -21,6 +21,17 @@ class Merchant
     item_repo.find_all_by_merchant_id(self.id)
   end
 
+  def invoices
+   invoice_repo = repo.engine.invoice_repository
+   invoice_repo.find_all_by_merchant_id(self.id)
+  end
+
+  def paid_invoices
+    invoices.select do |inv|
+      inv.paid?
+    end
+  end
+
   def successful_invoice_items
     paid_invoices.map do |paid_invoice|
       paid_invoice.invoice_items
@@ -35,14 +46,47 @@ class Merchant
     end
   end
 
-  def invoices
-   invoice_repo = repo.engine.invoice_repository
-   invoice_repo.find_all_by_merchant_id(self.id)
+  def all_customers_that_paid
+    paid_invoices.map do |paid|
+      paid.customer
+    end
   end
 
-  def paid_invoices
+  def invoices_for_paid_customer
+    all_customers_that_paid.map do |paid|
+      paid.invoices
+    end
+  end
+
+  def paid_invoices_per_customer
+    invoices_for_paid_customer.map do |invoices|
+      invoices.find_all do |invoice|
+        invoice.paid?
+      end
+    end
+  end
+
+  def total_per_customer
+    paid_invoices_per_customer.map do |invoice_objects|
+      invoice_objects.count
+    end
+  end
+
+  def favorite_customer
+    arr = all_customers_that_paid.zip(total_per_customer)
+    fav = Hash[*arr.flatten]
+    fav.max_by{|k,v| v}.first
+  end
+
+  def not_paid_invoices
     invoices.select do |inv|
-      inv.paid?
+      inv.not_paid?
+    end
+  end
+
+  def customers_with_pending_invoices
+    not_paid_invoices.map do |invoice|
+      invoice.customer
     end
   end
 

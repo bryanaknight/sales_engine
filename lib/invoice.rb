@@ -51,6 +51,16 @@ class Invoice
     end
   end
 
+  def failed_transactions
+    transactions.select do |trans|
+      trans.failed?
+    end
+  end
+
+  def not_paid?
+    failed_transactions.all?
+  end
+
   def paid?
     not successful_transactions.empty?
   end
