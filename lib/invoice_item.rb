@@ -34,7 +34,7 @@ class InvoiceItem
     unit_price.to_i * quantity.to_i
   end
 
-  def not_paid_invoice
+  def not_paid_invoice_item?
     invoice.not_paid?
     #true
   end

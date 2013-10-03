@@ -56,7 +56,7 @@ class Invoice
   end
 
   def not_paid?
-    not failed_transactions.empty?
+    not successful_transactions.any?
   end
 
   def paid?

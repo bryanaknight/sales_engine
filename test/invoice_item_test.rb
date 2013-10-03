@@ -64,4 +64,8 @@ class InvoiceItemTest < MiniTest::Test
     assert_equal 68175, invoice_item.price
   end
 
+  def test_not_paid_invoice
+    assert invoice_item.not_paid_invoice?
+  end
+
 end
