@@ -38,7 +38,7 @@ class CustomerRepositoryTest < MiniTest::Test
   end
 
   def test_find_all_by_first_name
-    assert_equal 2, cr.find_all_by_first_name('Heber').size
+    assert_equal 1, cr.find_all_by_first_name('Heber').size
   end
 
   def find_all_by_id

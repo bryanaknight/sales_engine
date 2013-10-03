@@ -36,4 +36,17 @@ class ItemRepository
     end
   end
 
+  def lowest_to_highest_sorted
+    all.sort_by do |item|
+      item.revenue
+    end
+  end
+
+  def higest_to_lowest_sorted
+    lowest_to_highest_sorted.reverse
+  end
+
+  def most_revenue(number_of_items)
+    higest_to_lowest_sorted[0,number_of_items]
+  end
 end

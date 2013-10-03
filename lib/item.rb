@@ -31,4 +31,30 @@ class Item
     merchant_repo.find_by_id(self.merchant_id)
   end
 
+  def not_paid_items?
+    invoice_items.map do |inv_item|
+      inv_item.not_paid_invoice
+    end
+  end
+
+  def revenue
+    unless not_paid_items?
+      sum = 0
+      invoice_items.each do |item|
+        sum += item.price
+      end
+      return sum
+    else
+      0
+    end
+  end
+
+  private
+
+  def estimate_revenue(invoices)
+    invoices.collect do |invoice|
+      invoice.total
+    end.reduce(0, :+)
+  end
+
 end

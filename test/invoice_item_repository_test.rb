@@ -15,7 +15,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_invoice_item_objects_are_created
-    assert_equal '539', invoiceitems.all.first.item_id
+    assert_equal '135', invoiceitems.all.first.item_id
   end
 
   def test_find_by_id
@@ -35,7 +35,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
 
   def test_find_by_quantity
     #skip
-    assert_equal 1, invoiceitems.find_by_quantity('9').quantity
+    assert_equal '9', invoiceitems.find_by_quantity('9').quantity
   end
 
   def test_find_by_unit_price
@@ -60,7 +60,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
 
   def test_find_all_by_invoice_id
     # skip
-    assert_equal 2, invoiceitems.find_all_by_invoice_id('2').size
+    assert_equal 4, invoiceitems.find_all_by_invoice_id('2').size
   end
 
   def test_find_all_by_item_id
@@ -73,9 +73,9 @@ class InvoiceItemRepositoryTest < MiniTest::Test
     assert_equal 1, invoiceitems.find_all_by_unit_price('1859').size
   end
 
-  def test_find_by_quantity
+  def test_find_all_by_quantity
     # skip
-    assert_equal 2, invoiceitems.find_all_by_quantity('5').size
+    assert_equal 13, invoiceitems.find_all_by_quantity('5').size
   end
 
   def find_all_by_updated_at

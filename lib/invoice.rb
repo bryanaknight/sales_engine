@@ -24,6 +24,16 @@ class Invoice
     transaction_repo.find_all_by_invoice_id(self.id)
   end
 
+  def customer
+    customer_repo = repo.engine.customer_repository
+    customer_repo.find_by_id(self.customer_id)
+  end
+
+  def merchant
+    merchant_repo = repo.engine.merchant_repository
+    merchant_repo.find_by_id(self.merchant_id)
+  end
+
   def invoice_items
     invoice_items_repo = repo.engine.invoice_item_repository
     invoice_items_repo.find_all_by_invoice_id(self.id)
@@ -33,16 +43,6 @@ class Invoice
     invoice_items.map do |invoice_item|
       invoice_item.item
     end
-  end
-
-  def customer
-    customer_repo = repo.engine.customer_repository
-    customer_repo.find_by_id(self.customer_id)
-  end
-
-  def merchant
-    merchant_repo = repo.engine.merchant_repository
-    merchant_repo.find_by_id(self.merchant_id)
   end
 
   def successful_transactions

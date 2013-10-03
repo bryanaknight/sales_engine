@@ -50,7 +50,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_find_all_by_customer_id
     #skip
-    assert_equal 1, invoices.find_all_by_customer_id('3').size
+    assert_equal 4, invoices.find_all_by_customer_id('3').size
   end
 
   def test_find_all_by_merchant_id
@@ -60,7 +60,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_find_all_by_status
     #skip
-    assert_equal 10, invoices.find_all_by_status('shipped').size
+    assert_equal 135, invoices.find_all_by_status('shipped').size
   end
 
   def test_find_all_by_created_at

@@ -25,7 +25,7 @@ class ItemRepositoryTest < MiniTest::Test
 
   def test_find_by_description
     #skip
-    assert_equal 'Nihil autem sit odio ', item.find_by_description('Nihil autem sit odio ').description
+    assert_equal 'Nihil autem sit odio', item.find_by_description('Nihil autem sit odio').description
   end
 
   def test_find_by_merchant_id
@@ -60,12 +60,12 @@ class ItemRepositoryTest < MiniTest::Test
 
   def test_find_all_by_description
     #skip
-    assert_equal 1, item.find_all_by_description('Nihil autem sit odio ').size
+    assert_equal 1, item.find_all_by_description('Nihil autem sit odio').size
   end
 
   def test_find_all_by_merchant_id
     #skip
-    assert_equal 10, item.find_all_by_merchant_id('1').size
+    assert_equal 15, item.find_all_by_merchant_id('1').size
   end
 
   def test_find_all_by_unit_price

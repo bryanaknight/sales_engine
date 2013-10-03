@@ -30,12 +30,12 @@ class TransactionTest < MiniTest::Test
 
   def test_credit_card_number
     #skip
-    assert_equal "465", transaction.credit_card_number
+    assert_equal "4.65441E+15", transaction.credit_card_number
   end
 
   def test_credit_card_expiration_date
     #skip
-    assert_equal "30/10/1989", transaction.credit_card_expiration_date
+    assert_equal nil, transaction.credit_card_expiration_date
   end
 
   def test_result

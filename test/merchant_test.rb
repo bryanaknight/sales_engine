@@ -38,22 +38,22 @@ class MerchantTest < Minitest::Test
   end
 
   def test_finding_items_by_merchant_id
-    assert_equal 10, merchant.items.size
+    assert_equal 15, merchant.items.size
   end
 
   def test_finding_invoices_by_merchant_id
-    assert_equal 0, merchant.invoices.size
+    assert_equal 1, merchant.invoices.size
   end
 
   def test_paid_invoices
     paid_invoices = merchant.invoices.select do |inv|
-      inv.paid? 
+      inv.paid?
     end
     paid_invoices.include?(merchant)
   end
 
   def test_revenue
-    assert_equal 0, merchant.revenue
+    assert_equal 370616, merchant.revenue
     #add revenue(date test)
   end
 
