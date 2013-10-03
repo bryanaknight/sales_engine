@@ -36,11 +36,11 @@ class InvoiceTest < MiniTest::Test
   end
 
   def test_it_gets_created_at
-    assert_equal '2012-03-25 09:54:09 UTC', invoice.created_at
+    assert_equal '2012-03-25', invoice.created_at
   end
 
   def test_it_gets_updated_at
-    assert_equal '2012-03-25 09:54:09 UTC', invoice.updated_at
+    assert_equal '2012-03-25', invoice.updated_at
   end
 
   def test_finds_transactions_related_to_invoices

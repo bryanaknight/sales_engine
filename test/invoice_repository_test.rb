@@ -65,17 +65,17 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_find_all_by_created_at
     #skip
-    assert_equal 1, invoices.find_all_by_created_at('2012-03-25').size
+    assert_equal 4, invoices.find_all_by_created_at('2012-03-25').size
   end
 
   def test_find_all_by_updated_at
     #skip
-    assert_equal 1, invoices.find_all_by_updated_at('2012-03-25').size
+    assert_equal 4, invoices.find_all_by_updated_at('2012-03-25').size
   end
 
   def test_get_random_invoice_object
     results = []
-    12.times{ results << invoices.all }
+    30.times{ results << invoices.all }
     assert results.uniq.count > 1
   end
 end
