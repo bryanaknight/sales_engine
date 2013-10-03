@@ -89,9 +89,9 @@ class Merchant
 
   def revenue(date = nil)
     if date.nil?
-      estimate_revenue(paid_invoices)
+      BigDecimal(estimate_revenue(paid_invoices))
     else
-      estimate_revenue(paid_invoices_by_date(date))
+      BigDecimal(estimate_revenue(paid_invoices_by_date(date)))
     end
   end
 
