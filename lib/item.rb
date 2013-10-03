@@ -29,14 +29,15 @@ class Item
     merchant_repo.find_by_id(self.merchant_id)
   end
 
-  def not_paid_items?
-    invoice_items.map do |inv_item|
+  def not_paid_items
+    x = invoice_items.map do |inv_item|
       inv_item.not_paid_invoice_item?
     end
+    x.first
   end
 
   def revenue
-    unless not_paid_items?
+    unless not_paid_items
       sum = 0
       invoice_items.each do |item|
         sum += item.price

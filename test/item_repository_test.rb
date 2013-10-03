@@ -89,4 +89,9 @@ class ItemRepositoryTest < MiniTest::Test
     12.times{ results << item.random }
     assert results.uniq.count > 1
   end
+
+  def test_most_revenue
+    assert_equal 208510, item.most_revenue(135).first.revenue
+    assert_equal 0, item.most_revenue(135).last.revenue
+  end
 end
