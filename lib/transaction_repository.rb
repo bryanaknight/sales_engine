@@ -13,7 +13,7 @@ class TransactionRepository
   end
 
   def all
-    transactions = read_file.collect { |transaction| Transaction.new(transaction, self)}
+    @transactions ||= read_file.collect { |transaction| Transaction.new(transaction, self)}
   end
 
   def random
