@@ -8,8 +8,6 @@ class InvoiceRepository
              :engine
 
   def initialize(filename = "./data/invoices.csv", engine)
-  # def initialize(engine,filename = "./data/invoices.csv")
-    # @filename = filename || "./data/invoices.csv"
     @filename = filename
     @engine = engine
   end
@@ -32,10 +30,6 @@ class InvoiceRepository
       all.find {|invoice| invoice.send(var).downcase == value.downcase }
     end
   end
-
-  # define_method "find_by_id" do |value|
-  #   all.select { |invoice| invoice.id.downcase == value.downcase }
-  # end
 
   %w(id customer_id merchant_id status created_at updated_at).each do |var|
     define_method "find_all_by_#{var}" do |value|

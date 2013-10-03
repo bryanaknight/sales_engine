@@ -58,7 +58,11 @@ class TransactionTest < MiniTest::Test
   end
 
   def test_transaction_successful
-    assert transaction.successful?
+    assert 'success', transaction.successful?
+  end
+
+  def test_transaction_fails
+    assert 'fails', transaction.failed
   end
 
 end

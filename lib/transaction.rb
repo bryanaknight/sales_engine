@@ -30,7 +30,7 @@ attr_reader   :id,
     result == 'success'
   end
 
-  def failed?
+  def failed
     result == 'failed'
   end
 

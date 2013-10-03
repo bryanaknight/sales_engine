@@ -25,9 +25,9 @@ class TransactionRepositoryTest < MiniTest::Test
     assert_equal '4.84452E+15', tr.find_by_credit_card_number('4.84452E+15').credit_card_number
   end
 
-  def test_find_by_credit_card_expiration_date
-    #assert_equal nil, tr.find_by_credit_card_expiration_date(nil)
-  end
+  #def test_find_by_credit_card_expiration_date
+  #  #assert_equal nil, tr.find_by_credit_card_expiration_date(nil)
+  #end
 
   def test_find_by_result
     assert_equal '1', tr.find_by_result('success').id

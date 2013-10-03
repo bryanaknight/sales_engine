@@ -46,6 +46,8 @@ class MerchantTest < Minitest::Test
   end
 
   def test_paid_invoices
+    #Lol please tell me how we are testing this!!!
+    #To tired to try and figure it out
     paid_invoices = merchant.invoices.select do |inv|
       inv.paid?
     end
@@ -54,8 +56,14 @@ class MerchantTest < Minitest::Test
 
   def test_revenue
     assert_equal 370616, merchant.revenue
-    #add revenue(date test)
   end
 
+  def test_favorite_customer
+    assert_equal 'Parker', merchant.favorite_customer.first_name
+  end
 
+  def test_customers_with_pending_invoices
+    merchant_34 = merchants[33].customers_with_pending_invoices
+    assert_equal 2, merchant_34.size
+  end
 end
