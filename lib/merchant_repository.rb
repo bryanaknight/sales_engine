@@ -17,7 +17,7 @@ class MerchantRepository
   end
 
   def all
-    read_file.collect {|merchant| Merchant.new(merchant, self)}
+    @all ||= read_file.collect {|merchant| Merchant.new(merchant, self)}
   end
 
   def random
@@ -65,7 +65,7 @@ class MerchantRepository
   end
 
   def revenue(date)
-    all.reduce(0) do |merchant, sum|
+    all do |merchant, sum|
       sum += merchant.revenue(date)
     end
   end

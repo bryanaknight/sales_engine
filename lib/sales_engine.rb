@@ -14,14 +14,16 @@ class SalesEngine
               :transaction_repository
 
   def initialize
+    startup
+  end
+
+  def startup
     @invoice_repository      = InvoiceRepository.new(nil, self)
-    # @invoice_repository      = InvoiceRepository.new(self)
     @item_repository         = ItemRepository.new(nil, self)
     @invoice_item_repository = InvoiceItemRepository.new(nil, self)
     @customer_repository     = CustomerRepository.new(nil, self)
     @transaction_repository  = TransactionRepository.new(nil, self)
     @merchant_repository     = MerchantRepository.new(nil, self)
   end
-
 
 end

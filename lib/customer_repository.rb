@@ -7,6 +7,9 @@ class CustomerRepository
  attr_reader :filename,
              :engine
 
+  #Deal with the filename its useless only tests are using it!!
+  #All method needs to be broken up, you want the objects to be stored
+  #Into a private method and assigned to a variable in the all method
   def initialize(filename = "./data/customers.csv", engine)
     @filename = filename
     @engine   = engine

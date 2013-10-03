@@ -54,4 +54,16 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_most_revenue
     assert_equal "84", mr.most_revenue(10).first.id
   end
+
+  def test_most_items
+    #binding.pry I need to improve the test to make sure
+    #that the business logic is really there
+    #best way to do this is to do what am doing in pry as tests!!
+    assert_equal '26', mr.most_items(10).first.id
+  end
+
+  def test_revenue_date
+    #binding.pry work in progress
+    assert_equal 100, mr.revenue('2012-03-10 00:54:09 UTC').count
+  end
 end

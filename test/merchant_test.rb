@@ -59,6 +59,9 @@ class MerchantTest < Minitest::Test
   end
 
   def test_favorite_customer
+    #Only test Public API - How do other objects in the system communicate with this object
+    #Behavoiur - When you call a mehtod in your class the right thing happens
+    #Implementation -How it achieves what it achieves Never
     assert_equal 'Parker', merchant.favorite_customer.first_name
   end
 

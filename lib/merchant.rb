@@ -67,8 +67,8 @@ class Merchant
   end
 
   def total_per_customer
-    paid_invoices_per_customer.map do |invoice_objects|
-      invoice_objects.count
+    paid_invoices_per_customer.map do |invoices|
+      invoices.count
     end
   end
 
@@ -108,6 +108,7 @@ class Merchant
 
   def paid_invoices_by_date(date)
     paid_invoices.select { |paid_invoice| paid_invoice.created_at == date }
+    #get price from unit_prices
   end
 
 

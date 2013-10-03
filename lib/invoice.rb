@@ -66,11 +66,9 @@ class Invoice
   end
 
   def total
-    sum = 0
-    invoice_items.each do |item|
-      sum += item.price
-    end
-    return sum
+    invoice_items.map do |item|
+       item.price
+    end.inject(0, :+)
   end
 
 end
