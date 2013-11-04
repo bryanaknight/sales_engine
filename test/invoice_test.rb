@@ -3,47 +3,80 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/invoice"
 require "csv"
+require './lib/invoice_repository'
+require 'pry'
 
 class InvoiceTest < MiniTest::Test
-  def contents
-    contents = CSV.read "./data/invoices.csv", headers: true, header_converters: :symbol
-  end
+  attr_reader :engine,
+              :repo,
+              :invoices,
+              :invoice
 
-  def invoice_attributes
-    contents.each do |attribute|
-      id          = attribute[:id]       
-      customer_id = attribute[:customer_id]       
-      merchant_id = attribute[:merchant_id]
-      status      = attribute[:status]
-      created_at  = attribute[:created_at] 
-      updated_at  = attribute[:updated_at] 
-    end
-  end
-
-  def invoice
-    @invoice ||= Invoice.new(invoice_attributes)
+  def setup
+    @engine = SalesEngine.new
+    @repo = engine.invoice_repository
+    @invoices = engine.invoice_repository.all
+    @invoice = invoices.first
   end
 
   def test_it_gets_item_id
-    assert_equal invoice_attributes[:id], invoice.id
+    assert_equal '1', invoice.id
   end
 
   def test_it_gets_customer_id
-    assert_equal invoice_attributes[:customer_id], invoice.customer_id
+    assert_equal '1', invoice.customer_id
   end
 
-  def test_it_gets_unit_price
-    assert_equal invoice_attributes[:status], invoice.status
+  def test_it_gets_status
+    assert_equal 'shipped', invoice.status
   end
 
   def test_it_gets_merchant_id
-    assert_equal invoice_attributes[:merchant_id], invoice.merchant_id
+    assert_equal '26', invoice.merchant_id
   end
 
   def test_it_gets_created_at
-    assert_equal invoice_attributes[:created_at], invoice.created_at
+    assert_equal '2012-03-25', invoice.created_at
   end
+
   def test_it_gets_updated_at
-    assert_equal invoice_attributes[:updated_at], invoice.updated_at
+    assert_equal '2012-03-25', invoice.updated_at
   end
+
+  def test_finds_transactions_related_to_invoices
+   assert_equal 1, invoice.transactions.size
+  end
+
+  def test_finds_invoice_items_related_to_invoices
+   assert_equal 8, invoice.invoice_items.size
+  end
+
+  def test_find_customer_related_to_invoice
+   assert_equal 'Joey', invoice.customer.first_name
+  end
+
+  def test_find_merchant_related_to_invoice
+    assert_equal 'Balistreri, Schaefer and Kshlerin', invoice.merchant.name
+  end
+
+  def test_find_items_by_way_of_invoice_items_by_invoice_id
+    assert_equal 1 , invoice.items.compact.size
+  end
+
+  def test_successful_transactions
+    assert_equal 1, invoice.successful_transactions.size
+  end
+
+  def test_paid?
+    assert invoice.paid?
+  end
+
+  def test_not_paid?
+    refute invoice.not_paid?
+  end
+
+  def test_total
+    assert_equal 2106777, invoice.total
+  end
+
 end

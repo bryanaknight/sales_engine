@@ -1,72 +1,68 @@
-require "merchant"
-require "pry"
-require "csv"
-
 class MerchantRepository
- attr_reader :filename
-  def initialize(filename = "./data/merchants.csv")
+ attr_reader :filename,
+             :engine
+  def initialize(filename = "./data/merchants.csv", engine)
     @filename = filename
+    @engine = engine
   end
 
   def read_file
-    rows = CSV.read filename, headers: true, header_converters: :symbol
+    filename = "./data/merchants.csv"
+    CSV.read filename, headers: true, header_converters: :symbol
   end
 
-  def merchant_objects
-    merchants_list = read_file.collect do |merchant|
-      Merchant.new(merchant)
-    end
+  def all
+    @all ||= read_file.collect {|merchant| Merchant.new(merchant, self)}
   end
 
-  #This is some random shit!!!
   def random
-    merchant_objects.sample
+    all.sample
   end
 
-  #Add functionality to type attribute
-  #where the attribute does not have to
-  #be a symbol.
-  def find_by_attribute(attribute, value)
-    merchant_objects.find do |merchant|
-      merchant.send(attribute).downcase == value.downcase
+  %w(id name created_at updated_at).each do |var|
+    define_method "find_by_#{var}" do |value|
+      all.find {|merchant| merchant.send(var).downcase == value.downcase }
     end
   end
 
-  def find_by_name(value)
-    find_by_attribute(:name, value)
-  end
-
-  def find_by_id(value)
-    find_by_attribute(:id, value)
-  end
-
-  def find_by_created_at(value)
-    find_by_attribute(:created_at, value)
-  end
-
-  def find_by_updated_at(value)
-    find_by_attribute(:updated_at, value)
-  end
-  
-  def find_all_by_attribute(attribute, value)
-    merchant_objects.select do |merchant|
-      merchant.send(attribute).downcase == value.downcase
+  %w(id name created_at updated_at).each do |var|
+    define_method "find_all_by_#{var}" do |value|
+      all.select { |merchant| merchant.send(var).downcase == value.downcase }
     end
   end
 
-  def find_all_by_name(value)
-    find_all_by_attribute(:name, value)
+  def lowest_to_highest_quantity
+    all.sort_by do |merchant|
+      merchant.quantity
+    end
   end
 
-  def find_all_by_id(value)
-    find_all_by_attribute(:id, value)
+  def higest_to_lowest_quantity
+    lowest_to_highest_quantity.reverse
   end
 
-  def find_all_by_created_at(value)
-    find_all_by_attribute(:created_at, value)
+  def most_items(number_of_merchants)
+    higest_to_lowest_quantity[0,number_of_merchants]
   end
 
-  def find_all_by_updated_at(value)
-    find_all_by_attribute(:updated_at, value)
+  def lowest_to_highest_sorted
+    all.sort_by do |merchant|
+      merchant.revenue
+    end
   end
+
+  def higest_to_lowest_sorted
+    lowest_to_highest_sorted.reverse
+  end
+
+  def most_revenue(number_of_merchants)
+    higest_to_lowest_sorted[0,number_of_merchants]
+  end
+
+  def revenue(date)
+    all do |merchant, sum|
+      sum += merchant.revenue(date)
+    end
+  end
+
 end
